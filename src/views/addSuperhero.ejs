@@ -1,0 +1,92 @@
+ <div class="max-w-md mx-auto mt-8 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="text-2xl py-3 px-4 bg-sky-500 text-white text-center font-bold uppercase">
+        Nuevo Superhéroe
+    </div>
+    <form class="py-3 px-4" action="agregar" method="POST">
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="nombreSuperHeroe">
+                Nombre Superhéroe
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="nombreSuperHeroe" type="text" placeholder="Ingrese el nombre del superhéroe" required name="nombreSuperheroe">
+        </div>
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1">
+                Nombre Real
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="nombreReal" type="text" placeholder="Ingrese el nombre real del superhéroe" required name="nombreReal">
+        </div>
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="edad">
+                Edad
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="edad" type="number" placeholder="Ingrese la edad del superhéroe" required name="edad">
+        </div>
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="planetaOrigen">
+                Planeta de Origen
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="planetaOrigen" type="text" placeholder="Ingrese el planeta de origen del superhéroe" required name="planetaOrigen">
+        </div>
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="debilidad">
+                Debilidad
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="debilidad" type="text" placeholder="Ingrese la debilidad del superhéroe" required name="debilidad">
+        </div>
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="poderes">
+                Poderes
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="poderes" type="text" placeholder="Ingrese los poderes del superhéroe (separados por comas)" required name="poderes">
+        </div>
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="aliados">
+                Aliados
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="aliados" type="text" placeholder="Ingrese los aliados del superhéroe (separados por comas)" required name="aliados">
+        </div>
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="enemigos">
+                Enemigos
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="enemigos" type="text" placeholder="Ingrese los enemigos del superhéroe (separados por comas)" required name="enemigos">
+        </div> 
+        <div class="mb-3">
+            <label class="block text-gray-700 font-bold mb-1" for="enemigos">
+                Creador
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline text-sm"
+                id="creador" type="text" placeholder="Ingrese su nombre por favor" required name="creador">
+        </div> 
+        <div class="flex items-center justify-center gap-2 mb-3">
+            <button
+                class="bg-sky-500 text-white py-2 px-4 rounded hover:bg-sky-700 focus:outline-none focus:shadow-outline"
+                type="submit">
+                Agregar Superhéroe
+            </button>
+            <button 
+                class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 focus:outline-none focus:shadow-outline"
+                type="button" onclick="window.location.href='/api/heroes/vista'">
+                Volver al Listado
+            </button>
+        </div>
+    </form>
+  </div>
+

@@ -1,0 +1,146 @@
+ <h1 class="text-3xl font-bold text-center mb-8">DASHBOARD SUPERHEROES</h1>
+    <div class="flex justify-end mb-4">
+      <a href="/api/heroes/formulario" class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-500">Agregar Superhéroe</a>
+    </div>
+
+    <% if (superheroes.length === 0) { %>
+      <p class="text-center text-gray-500">No hay superhéroes registrados.</p>
+    <% } else { %>
+      <div class="overflow-x-auto bg-gray-200 rounded-lg shadow">
+        <table class="w-full table-auto text-xs">
+          <thead class="bg-blue-300 text-gray-800 uppercase">
+            <tr>
+              <th class="py-2 px-4 text-center">Superhéroe</th>
+              <th class="py-2 px-4 text-center">Nombre</th>
+              <th class="py-2 px-4 text-center">Edad</th>
+              <th class="py-2 px-4 text-center">Planeta</th>
+              <th class="py-2 px-4 text-center">Debilidad</th>
+              <th class="py-2 px-4 text-center">Poderes</th>
+              <th class="py-2 px-4 text-center">Aliados</th>
+              <th class="py-2 px-4 text-center">Enemigos</th>
+              <th class="py-2 px-4 text-center">Acción</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700">
+            <% superheroes.forEach(superhero => { %>
+              <tr class="border-b border-gray-200 hover:bg-gray-100 ">
+                <td class="py-2 px-4 font-bold"><%= superhero.nombreSuperheroe %></td>
+                <td class="py-2 px-4"><%= superhero.nombreReal %></td>
+                <td class="py-2 px-4"><%= superhero.edad %></td>
+                <td class="py-2 px-4"><%= superhero.planetaOrigen %></td>
+                <td class="py-2 px-4"><%= superhero.debilidad %></td>
+                <td class="py-2 px-4">
+                  <% if (superhero.poderes && superhero.poderes.length) { %>
+                    <ul class="list-disc pl-5">
+                      <% superhero.poderes.forEach(function(p) { %>
+                        <li><%= p %></li>
+                      <% }) %>
+                    </ul>
+                  <% } else { %>
+                    <span class="text-gray-500">-</span>
+                  <% } %>
+                </td>
+                <td class="py-2 px-4">
+                  <% if (superhero.aliados && superhero.aliados.length) { %>
+                    <ul class="list-disc pl-5">
+                      <% superhero.aliados.forEach(function(a) { %>
+                        <li><%= a %></li>
+                      <% }) %>
+                    </ul>
+                  <% } else { %>
+                    <span class="text-gray-500">-</span>
+                  <% } %>
+                </td>
+                <td class="py-2 px-4">
+                  <% if (superhero.enemigos && superhero.enemigos.length) { %>
+                    <ul class="list-disc pl-5">
+                      <% superhero.enemigos.forEach(function(e) { %>
+                        <li><%= e %></li>
+                      <% }) %>
+                    </ul>
+                  <% } else { %>
+                    <span class="text-gray-500">-</span>
+                  <% } %>
+                </td>
+                <td class="py-2 px-4 text-center">
+               <div class="flex items-center justify-center gap-2">
+                <div class="flex items-center justify-center gap-8">
+                  <!-- Botón Editar con ícono -->
+                  <a href="/api/heroes/<%= superhero._id %>/formularioEdit" 
+                    class="w-6 h-6 text-lime-700 hover:text-lime-600 transform hover:scale-110 transition duration-100 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                        viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036
+                              a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572
+                              L16.732 3.732z" />
+                    </svg>
+                  </a>
+
+                  <!-- Botón Eliminar con ícono -->
+                  <button data-id="<%= superhero._id %>" 
+                          class="w-6 h-6 text-red-600 hover:text-red-500 transform hover:scale-110 transition duration-100 ease-in-out deleteBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                        viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862
+                              a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6
+                              m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+<!-- ...código anterior... -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  // helper para escapar HTML y evitar inyección
+  const escapeHtml = (unsafe) => {
+    return unsafe
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  };
+
+  document.querySelectorAll('.deleteBtn').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('data-id');
+      // El nombre del superhéroe está en la primera celda de la fila
+      const nombre = this.closest('tr').querySelector('td')?.textContent?.trim() || 'este registro';
+      const safeNombre = escapeHtml(nombre);
+
+      Swal.fire({
+        html: `¿Estás seguro de que deseas eliminar a <strong class="text-black">${safeNombre}</strong> de la base de datos?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#9E9EA3',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Crear y enviar un formulario oculto para hacer DELETE
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = `/api/heroes/${id}`;
+          const hiddenMethod = document.createElement('input');
+          hiddenMethod.type = 'hidden';
+          hiddenMethod.name = '_method';
+          hiddenMethod.value = 'DELETE';
+          form.appendChild(hiddenMethod);
+          document.body.appendChild(form);
+          form.submit();
+        }
+      });
+    });
+  });
+</script>
