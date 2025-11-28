@@ -105,4 +105,4 @@ export const validarEdicionSuperheroe = () => [
         .isString().withMessage('Cada poder debe ser una cadena de texto')
         .isLength({ min: 3, max: 60 }).withMessage('Cada poder debe tener entre 3 y 60 caracteres')
         .trim()
-      ]
+    ]

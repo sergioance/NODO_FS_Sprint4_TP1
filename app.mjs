@@ -27,10 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 // Variables globales para navbar
 app.use((req, res, next) => {
   res.locals.navbarLinks = [
-    { text: 'Inicio', href: '/', icon: '/icons/marvel_logo.ico' },
-    { text: 'Listar Superhéroes', href: '/api/heroes/vista', icon: '/icons/dashboard.svg' },
+    //{ text: 'Inicio', href: '/', icon: '/icons/marvel_logo.ico' },
+    { text: 'Listado Superhéroes', href: '/api/heroes/vista', icon: '/icons/dashboard.svg' },
     // { text: 'Agregar Superhéroe', href: '/api/heroes/formulario', icon: '/icons/add.svg' },
-    { text: 'Acerca de', href: '/about', icon: '/icons/about.svg' },
+    { text: 'Sobre Nosotros', href: '/about', icon: '/icons/about.svg' },
     { text: 'Contactar', href: '/contact', icon: '/icons/contact.svg' },
   
   ];
@@ -56,7 +56,7 @@ app.get('/about', (req, res) => {
 app.get('/contact', (req, res) => res.render('contact'));
 
 app.use((req, res) => {
-   res.status(404).send('Página no encontrada');
+  res.status(404).send('Página no encontrada');
 });
 
 app.listen(PORT, () => {

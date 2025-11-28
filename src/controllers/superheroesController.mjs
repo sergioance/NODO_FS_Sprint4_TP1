@@ -72,14 +72,14 @@ export async function obtenerSuperheroesMayoresDe30Controller(req, res) {
 
 //Crear superhéroe
 export async function crearSuperheroeController(req, res) {
-  try {
+    try {
     const datos = req.body;
     const nuevoSuperheroe = await crearSuperheroe(datos);
     const superheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
     res.status(201).json(superheroeFormateado);
-  } catch (error) {
+} catch (error) {
     res.status(500).send({ mensaje: 'Error al crear el superhéroe', error: error.message });
-  }
+}
 }
 
 //Actualizar superhéroe
@@ -108,16 +108,16 @@ export async function actualizarSuperheroeController(req, res) {
 //Borrar superhéroe por id
 // En tu controlador superheroesController.mjs
 export async function borrarSuperheroeController(req, res) {
-  const { id } = req.params;
-  try {
+    const { id } = req.params;
+    try {
     const superheroeBorrado = await borrarSuperheroe(id);
     if (!superheroeBorrado) {
-      return res.status(404).send({ mensaje: 'Superhéroe no encontrado' });
+        return res.status(404).send({ mensaje: 'Superhéroe no encontrado' });
     }
     res.redirect('/api/heroes/vista');
-  } catch (error) {
+} catch (error) {
     res.status(500).send({ mensaje: 'Error al borrar el superhéroe', error: error.message });
-  }
+}
 }
 
 // Borrar superhéroe por nombre
@@ -140,8 +140,8 @@ export async function borrarSuperheroePorNombreController(req, res) {
 
 export async function vistaDasboardSuperheroesController(req, res) {
     try {
-     const superheroes = await obtenerTodosLosSuperheroes();
-     res.render('dashboard', { superheroes });
+        const superheroes = await obtenerTodosLosSuperheroes();
+        res.render('dashboard', { superheroes });
 }catch (error) {
     res.status(500).send({ mensaje: 'Error al cargar el dashboard', error: error.message });
     }
@@ -149,27 +149,27 @@ export async function vistaDasboardSuperheroesController(req, res) {
 
 // Agregar nuevo superhéroe desde formulario
 export async function agregarSuperheroeController(req, res) {
-  try {
+    try {
     console.log('Request body:', req.body);
     let { nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poderes, aliados, enemigos, creador } = req.body;
 
     const nuevo = await crearSuperheroe({
-      nombreSuperheroe: (nombreSuperheroe || '').trim(),
-      nombreReal: nombreReal.trim(),
-      edad: parseInt(edad),
-      planetaOrigen: planetaOrigen?.trim(),
-      debilidad: debilidad?.trim(),
-      poderes: poderes,
-      aliados: aliados,
-      enemigos: enemigos,
-      creador: creador?.trim()
+        nombreSuperheroe: (nombreSuperheroe || '').trim(),
+        nombreReal: nombreReal.trim(),
+        edad: parseInt(edad),
+        planetaOrigen: planetaOrigen?.trim(),
+        debilidad: debilidad?.trim(),
+        poderes: poderes,
+        aliados: aliados,
+        enemigos: enemigos,
+        creador: creador?.trim()
     });
 
     // Redirigir después de crear el superhéroe
     return res.redirect('/api/heroes/vista'); // Asegúrate de usar return aquí
-  } catch (error) {
+} catch (error) {
     return res.status(500).send({ mensaje: 'Error al agregar superhéroe', error: error.message });
-  }
+}
 }
 
 // Editar superhéroe
@@ -186,12 +186,12 @@ export async function editarSuperheroeController(req, res) {
 
 // Eliminar superhéroe
 export async function eliminarSuperheroeController(req, res) {
-  try {
+    try {
     const { id } = req.params;
     await superHeroRepository.eliminarPorId(id);
     res.redirect('/api/heroes/vista');
-  } catch (error) {
+} catch (error) {
     res.status(500).json({ mensaje: 'Error al eliminar superhéroe', error: error.message });
-  }
+}
 }
 
